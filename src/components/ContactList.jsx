@@ -1,5 +1,5 @@
-import React from 'react';
-import { useState } from 'react'
+import React, { useState } from 'react';
+import ContactRow from './ContactRow.jsx'
 
 const dummyContacts = [
   { id: 1, name: "R2-D2", phone: "222-222-2222", email: "r2d2@droids.com" },
@@ -25,7 +25,10 @@ export default function ContactList() {
               <td>Phone</td>
             </tr>
             {
-               // Map over data here
+              // Map over data here
+              contacts.map((contact)=>{
+                return <ContactRow key={contact.id} contact={contact} />
+              })
              }
           </tbody>
         </table>
