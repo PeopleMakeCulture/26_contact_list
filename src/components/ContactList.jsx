@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ContactRow from './ContactRow.jsx'
 
 const dummyContacts = [
@@ -7,10 +7,28 @@ const dummyContacts = [
   { id: 3, name: "BB-8", phone: "888-888-8888", email: "bb8@droids.com" },
 ];
 
+// NOTE: currently no data at this url
+const url = 'https://jsonplace-univclone.herokuapp.com/users'
+
 export default function ContactList() { 
 
   const [contacts, setContacts] = useState(dummyContacts)
+
+  useEffect(() => {
+  async function fetchContacts() {
+    try {
+      const response = await fetch(url);
+      const result = await response.json();
+      setContacts(result);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  fetchContacts()
+}, []);
+
   console.log("Contacts: ", contacts)
+
   return ( 
         <table>
           <thead>
